@@ -1,0 +1,36 @@
+{{ app_name }}
+
+Welcome to {{ app_name }}!
+===========================
+
+Hi {{ username }},
+
+Thanks for joining {{ app_name }}! We're thrilled to have you as part of our community.
+
+Your account is now active and ready to use.
+
+GET STARTED:
+{{ dashboard_link }}
+
+WHAT'S AVAILABLE:
+
+- {{ feature_1_title }}: {{ feature_1_description }}
+- {{ feature_2_title }}: {{ feature_2_description }}
+- {{ feature_3_title }}: {{ feature_3_description }}
+- {{ feature_4_title }}: {{ feature_4_description }}
+
+NEXT STEPS:
+
+1. Complete your profile to personalize your experience
+2. Explore our getting started guide to learn the basics
+3. Join our community forum to connect with other users
+4. Check out our help center for tips and tutorials
+
+---
+
+If you have any questions or need help getting started, our support team is always here to help.
+
+Support: {{ support_link }}
+Help Center: {{ help_center_link }}
+
+© {{ current_year }} {{ app_name }}. All rights reserved.

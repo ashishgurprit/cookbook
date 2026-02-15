@@ -1,0 +1,6 @@
+{
+  "version": "1.73.0",
+  "sync_method": "sqlite",
+  "database_path": "C:\\Users\\ashis\\documents\\coding\\Streamlined-Development\\.claude\\content.db",
+  "description": "This project uses centralized SQLite database for lessons, skills, and code blocks"
+}
