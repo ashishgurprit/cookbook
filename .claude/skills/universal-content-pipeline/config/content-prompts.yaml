@@ -1,0 +1,320 @@
+# Content Generation Prompts
+# AI prompts for generating blog content from chunks
+
+prompts:
+  # Main blog post generation
+  blog_post_generation:
+    system: |
+      You are an expert content writer specializing in {style} content for {audience}.
+      Your task is to transform source material into engaging, SEO-optimized blog posts.
+
+      Guidelines:
+      - Write in a clear, engaging {style} tone
+      - Target audience: {audience}
+      - Include practical examples and actionable insights
+      - Optimize for SEO without sacrificing readability
+      - Use headings (H2, H3) for structure
+      - Keep paragraphs short (3-4 sentences max)
+      - Include internal linking opportunities
+      - Make content scannable with bullet points and lists
+      - End with a clear call-to-action or summary
+
+    user: |
+      Transform the following content chunk into a complete, engaging blog post.
+
+      CHUNK CONTENT:
+      {chunk_text}
+
+      KNOWLEDGE CONTEXT:
+      Key Concepts: {concepts}
+      Related Themes: {themes}
+      Related Chunks: {related_chunks}
+
+      SOURCE METADATA:
+      Book Title: {book_title}
+      Author: {author}
+      Chapter: {chapter}
+
+      Please create a complete blog post with the following structure:
+
+      1. **Title**: SEO-optimized, compelling (50-60 characters)
+         - Include a number if possible
+         - Use power words (essential, proven, ultimate, complete, etc.)
+         - Make it specific and benefit-driven
+
+      2. **Meta Description**: 150-160 characters
+         - Include main keyword
+         - Compelling call-to-action
+         - Summarize the key benefit
+
+      3. **Introduction**: 2-3 paragraphs
+         - Hook the reader immediately
+         - Present the problem or opportunity
+         - Preview what they'll learn
+
+      4. **Body Content**: Well-structured with H2/H3 headings
+         - Break into logical sections
+         - Use examples, analogies, or stories
+         - Include actionable tips
+         - Add bullet points for scannability
+
+      5. **Conclusion**: 1-2 paragraphs
+         - Summarize key takeaways
+         - Provide clear next steps
+         - End with a question or call-to-action
+
+      6. **Internal Links**: Suggest 3-5 internal linking opportunities
+         - Identify phrases that could link to related topics
+         - Note which related chunks these could link to
+
+      7. **Featured Image**: Describe what image would best represent this post
+         - Be specific about composition, mood, elements
+         - Suitable for DALL-E generation
+
+      8. **Metadata**:
+         - Focus Keyword: (main SEO keyword)
+         - Categories: (2-3 relevant categories)
+         - Tags: (5-7 relevant tags)
+
+      Format your response as follows:
+
+      Title: [Your title here]
+
+      Meta Description: [Your meta description]
+
+      Focus Keyword: [keyword]
+
+      Categories: [Category 1, Category 2]
+
+      Tags: [tag1, tag2, tag3, tag4, tag5]
+
+      Featured Image: [Image description]
+
+      Internal Links:
+      - [anchor text] → Related Topic/Chunk ID
+
+      ---
+
+      Content:
+
+      [Your full blog post content in HTML format]
+
+  # Title generation (alternative titles)
+  title_generation:
+    system: |
+      You are an expert at creating viral, SEO-optimized blog post titles.
+      You understand what makes titles click-worthy while maintaining quality.
+
+    user: |
+      Generate 5 different title options for a blog post about:
+
+      Topic: {topic}
+      Key Points: {key_points}
+      Focus Keyword: {keyword}
+
+      Requirements for each title:
+      - 50-60 characters
+      - Include the focus keyword naturally
+      - Use power words (proven, essential, ultimate, complete, simple, effective)
+      - Include numbers when possible
+      - Balance SEO with engagement
+      - Vary the style (how-to, list, question, statement, etc.)
+
+      Provide titles in order of recommendation (best first).
+
+  # Meta description generation
+  meta_description:
+    system: |
+      You are an SEO expert creating compelling meta descriptions that drive clicks.
+
+    user: |
+      Create a meta description for:
+
+      Title: {title}
+      Content Summary: {summary}
+      Focus Keyword: {keyword}
+
+      Requirements:
+      - Exactly 150-160 characters
+      - Include focus keyword naturally
+      - Include a benefit or hook
+      - End with a call-to-action (Learn more, Discover, Read how, etc.)
+      - Compelling but not clickbait
+      - Active voice, action-oriented
+
+  # Image prompt generation
+  image_prompt_generation:
+    system: |
+      You are an expert at creating detailed prompts for AI image generation (DALL-E, Midjourney).
+      You create prompts that result in professional, relevant, high-quality images.
+
+    user: |
+      Create a detailed image generation prompt for a blog post featured image:
+
+      Blog Title: {title}
+      Topic: {topic}
+      Style Preference: {style}
+
+      Requirements:
+      - Professional, high-quality aesthetic
+      - Relevant to the blog topic
+      - NO TEXT in the image
+      - 16:9 aspect ratio (horizontal)
+      - Modern, clean design
+      - Suitable for business/professional context
+
+      Include details about:
+      - Main subject/composition
+      - Color palette
+      - Mood/atmosphere
+      - Lighting
+      - Style (photorealistic, illustration, etc.)
+
+      Keep prompt under 400 characters.
+
+  # Internal linking suggestions
+  internal_linking:
+    system: |
+      You are an expert at identifying natural internal linking opportunities
+      that improve SEO and user experience.
+
+    user: |
+      Identify 3-5 internal linking opportunities in this content:
+
+      CONTENT:
+      {content}
+
+      AVAILABLE RELATED TOPICS:
+      {related_topics}
+
+      For each opportunity, provide:
+      1. Anchor text (the phrase to link)
+      2. Target topic (which related topic it should link to)
+      3. Relevance score (1-10)
+      4. Reason (why this is a good linking opportunity)
+
+      Guidelines:
+      - Use natural, contextual anchor text
+      - Avoid over-optimization
+      - Link to genuinely related content
+      - Prioritize user value over SEO
+
+  # Content improvement
+  content_improvement:
+    system: |
+      You are a content editor focused on improving clarity, engagement, and SEO.
+
+    user: |
+      Review and improve this blog post content:
+
+      {content}
+
+      Focus on:
+      1. Clarity and readability
+      2. Engagement (hooks, transitions, examples)
+      3. SEO optimization (keyword usage, heading structure)
+      4. Scannability (use of lists, subheadings)
+      5. Call-to-action effectiveness
+
+      Provide the improved version with a brief explanation of key changes.
+
+  # Excerpt generation
+  excerpt_generation:
+    system: |
+      You are an expert at writing compelling blog post excerpts that drive engagement.
+
+    user: |
+      Create a compelling excerpt (150-200 words) for this blog post:
+
+      Title: {title}
+      Main Content: {content}
+
+      Requirements:
+      - Hook the reader immediately
+      - Highlight the key benefit
+      - Create curiosity
+      - Include a subtle call-to-action
+      - Suitable for social media sharing
+      - Include the focus keyword: {keyword}
+
+  # Category suggestion
+  category_suggestion:
+    system: |
+      You are an expert at categorizing content for optimal organization and discoverability.
+
+    user: |
+      Suggest appropriate categories for this blog post:
+
+      Title: {title}
+      Content: {content_summary}
+
+      EXISTING CATEGORIES:
+      {existing_categories}
+
+      Rules:
+      - Suggest 2-3 categories maximum
+      - Use existing categories when appropriate
+      - Suggest new categories only if needed
+      - Prioritize broad, useful categories
+      - Consider user navigation and SEO
+
+  # Tag generation
+  tag_generation:
+    system: |
+      You are an expert at creating effective content tags for SEO and content discovery.
+
+    user: |
+      Generate 5-7 relevant tags for this blog post:
+
+      Title: {title}
+      Content: {content_summary}
+      Focus Keyword: {keyword}
+
+      Requirements:
+      - Mix of broad and specific tags
+      - Include focus keyword
+      - Include related keywords
+      - Use lowercase
+      - Avoid tag stuffing
+      - Think about what users might search for
+
+  # Social media post generation
+  social_media_twitter:
+    system: |
+      You are a social media expert creating engaging Twitter/X posts.
+
+    user: |
+      Create a Twitter/X post to promote this blog post:
+
+      Blog Title: {title}
+      Blog Excerpt: {excerpt}
+      Blog URL: {url}
+
+      Requirements:
+      - 280 characters maximum
+      - Engaging hook
+      - Include URL
+      - 2-3 relevant hashtags
+      - Call-to-action
+      - Conversational tone
+
+  social_media_linkedin:
+    system: |
+      You are a professional content creator for LinkedIn.
+
+    user: |
+      Create a LinkedIn post to share this blog article:
+
+      Blog Title: {title}
+      Blog Excerpt: {excerpt}
+      Blog URL: {url}
+
+      Requirements:
+      - Professional but engaging tone
+      - 150-200 words
+      - Hook in first line
+      - Brief summary of key points
+      - Include URL
+      - Relevant hashtags (3-5)
+      - Call-to-action
+      - Can use emojis sparingly for emphasis

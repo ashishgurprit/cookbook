@@ -1,0 +1,16 @@
+# WordPress SEO Optimizer Dependencies
+
+# WordPress API client (from modules/)
+# Assumes wordpress-publisher module is available
+
+# HTML parsing
+beautifulsoup4>=4.12.0
+
+# Text processing
+python-slugify>=8.0.0
+
+# Readability analysis (for future enhancement)
+textstat>=0.7.3
+
+# HTTP requests (inherited from wordpress-publisher)
+requests>=2.31.0

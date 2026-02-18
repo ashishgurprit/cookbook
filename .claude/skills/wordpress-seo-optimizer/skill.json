@@ -1,0 +1,47 @@
+{
+  "name": "wordpress-seo-optimizer",
+  "version": "0.1.0",
+  "description": "Comprehensive SEO/AEO/GEO optimization for WordPress sites",
+  "author": "Streamlined Development",
+  "triggers": [
+    "wordpress seo",
+    "optimize wordpress",
+    "wordpress-seo-optimizer",
+    "seo audit wordpress",
+    "wordpress geo",
+    "wordpress aeo"
+  ],
+  "commands": [
+    "analyze",
+    "optimize",
+    "keywords",
+    "technical",
+    "schema",
+    "monitor",
+    "report"
+  ],
+  "dependencies": {
+    "modules": [
+      "wordpress-publisher"
+    ],
+    "python": [
+      "requests",
+      "python-slugify",
+      "beautifulsoup4",
+      "textstat"
+    ]
+  },
+  "capabilities": [
+    "keyword-analysis",
+    "onpage-seo",
+    "technical-seo",
+    "schema-markup",
+    "geo-aeo-optimization",
+    "analytics-integration"
+  ],
+  "mvp_phase": 1,
+  "mvp_commands": [
+    "analyze",
+    "optimize"
+  ]
+}

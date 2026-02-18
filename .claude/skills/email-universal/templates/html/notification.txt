@@ -1,0 +1,35 @@
+{{ app_name }}
+
+{{ notification_title }}
+=========================
+
+Hi {{ username }},
+
+{{ notification_intro }}
+
+---
+
+{{ notification_heading }}
+
+{{ notification_message }}
+
+Category: {{ notification_category }}
+Time: {{ notification_timestamp }}
+
+---
+
+{{ action_text }}:
+{{ action_link }}
+
+You received this notification because {{ notification_reason }}.
+
+---
+
+Manage Your Notifications:
+{{ settings_link }}
+
+Support: {{ support_link }}
+
+© {{ current_year }} {{ app_name }}. All rights reserved.
+
+Don't want to receive these emails? Unsubscribe: {{ unsubscribe_link }}

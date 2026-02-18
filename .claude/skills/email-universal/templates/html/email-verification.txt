@@ -1,0 +1,25 @@
+{{ app_name }}
+
+Verify Your Email Address
+==========================
+
+Hi {{ username }},
+
+Thanks for signing up! To complete your registration and activate your account, please verify your email address.
+
+Click this link to verify:
+{{ verification_link }}
+
+OR enter this verification code:
+{{ verification_code }}
+
+IMPORTANT: This verification code will expire in {{ expiry_hours }} hours.
+
+If you didn't create an account, please ignore this email.
+
+---
+
+If you have any questions, please contact our support team:
+{{ support_link }}
+
+© {{ current_year }} {{ app_name }}. All rights reserved.

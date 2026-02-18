@@ -1,0 +1,226 @@
+# Universal Content Pipeline Configuration
+# Complete configuration for document-to-content workflow
+
+pipeline:
+  name: "Book to Blog Pipeline"
+  version: "1.0.0"
+  description: "Automated document-to-content publishing pipeline"
+
+# STAGE 1: Document Ingestion
+document_ingestion:
+  supported_formats: ['pdf', 'epub', 'docx']
+  ocr_provider: 'google_vision'  # Options: 'google_vision', 'tesseract', 'none'
+  extract_tables: true
+  extract_images: true
+  quality_threshold: 0.85  # Minimum extraction confidence (0-1)
+
+  ocr_settings:
+    google_vision:
+      api_key_env: 'GOOGLE_VISION_API_KEY'
+      language_hints: ['en']
+    tesseract:
+      lang: 'eng'
+      config: '--psm 6'  # Assume uniform block of text
+
+# STAGE 2: Content Preparation
+content_preparation:
+  # Translation settings
+  translation:
+    enabled: false
+    target_language: 'en'
+    provider: 'google'  # Options: 'google', 'deepl', 'mymemory'
+    use_cache: true
+    preserve_formatting: true
+
+  # Text cleaning
+  cleaning:
+    remove_headers_footers: true
+    fix_hyphenation: true
+    normalize_whitespace: true
+    remove_page_numbers: true
+
+  # Chunking strategy
+  chunking:
+    strategy: 'hybrid'  # Options: 'hybrid', 'semantic', 'sentence', 'token'
+    max_tokens: 500
+    overlap_percent: 0.15
+    preserve_context: true
+
+    # Hybrid chunker settings
+    hybrid_settings:
+      model: 'gpt-4'
+      paragraph_priority: true
+      sentence_fallback: true
+
+# STAGE 3: Knowledge Extraction
+knowledge_extraction:
+  enabled: true
+  extract_concepts: true
+  extract_themes: true
+  extract_entities: true
+  min_concept_frequency: 3
+  theme_confidence_threshold: 0.7
+
+  # Entity types to extract
+  entity_types:
+    - people
+    - places
+    - organizations
+    - terms
+
+  # Embedding settings
+  embeddings:
+    model: 'text-embedding-3-small'
+    use_cache: true
+
+# STAGE 4: Content Generation
+content_generation:
+  # AI model settings
+  model: 'gpt-4'
+  temperature: 0.7
+  max_tokens: 2000
+
+  # Content style
+  style: 'educational'  # Options: 'educational', 'conversational', 'professional', 'casual'
+  audience: 'professionals'  # Options: 'professionals', 'students', 'general', 'executives'
+
+  # Content templates
+  content_templates:
+    enabled:
+      - how_to
+      - list
+      - concept_explanation
+      - case_study
+    auto_select: true  # Auto-select best template for content
+
+  # SEO optimization
+  seo:
+    optimize: true
+    target_keyword_density: 2.0  # Percentage
+    min_word_count: 800
+    max_word_count: 2000
+    include_internal_links: true
+    internal_links_per_post: 3
+
+  # Content quality
+  quality:
+    min_quality_score: 0.85
+    human_review_threshold: 0.90
+    regenerate_on_low_quality: true
+    max_regeneration_attempts: 2
+
+  # Cost optimization
+  cost_optimization:
+    use_cheaper_model_for_drafts: true
+    draft_model: 'gpt-3.5-turbo'
+    batch_api_calls: true
+    batch_size: 5
+
+# STAGE 5: Publishing
+publishing:
+  # WordPress settings
+  wordpress:
+    url: 'https://yourblog.com'
+    username_env: 'WORDPRESS_USERNAME'
+    password_env: 'WORDPRESS_APP_PASSWORD'
+    default_status: 'draft'  # Options: 'draft', 'publish', 'future'
+    default_author: 1
+    api_version: 'v2'
+
+  # Scheduling
+  scheduling:
+    enabled: true
+    strategy: 'spread'  # Options: 'spread', 'burst', 'custom'
+    posts_per_week: 3
+    publish_days: ['Mon', 'Wed', 'Fri']
+    publish_time: '09:00:00'
+    timezone: 'UTC'
+
+  # Categories
+  categories:
+    auto_assign: true
+    parent_category: 'Blog'
+    create_series_category: true
+    series_category_format: 'Book: {book_title}'
+
+  # Tags
+  tags:
+    auto_generate: true
+    max_tags_per_post: 7
+    include_concepts_as_tags: true
+
+  # Featured images
+  images:
+    generate_featured: true
+    image_generator: 'dall-e'  # Options: 'dall-e', 'stable-diffusion', 'midjourney', 'none'
+    image_style: 'professional'
+    optimize: true
+    max_size_kb: 500
+
+# STAGE 6: Distribution
+distribution:
+  enabled: true
+
+  # Social platforms
+  platforms:
+    twitter:
+      enabled: true
+      strategy: 'engagement'  # Options: 'promotional', 'educational', 'engagement'
+      include_hashtags: true
+      max_hashtags: 3
+
+    linkedin:
+      enabled: true
+      strategy: 'professional'
+      post_as_article: false  # false = regular post, true = LinkedIn article
+
+    facebook:
+      enabled: false
+      page_id: ''
+
+    instagram:
+      enabled: false
+      account_id: ''
+
+  # Newsletter
+  newsletter:
+    enabled: false
+    provider: 'mailchimp'  # Options: 'mailchimp', 'convertkit', 'substack'
+    list_id: ''
+    send_on_publish: false
+
+# ERROR HANDLING & RECOVERY
+error_handling:
+  retry_attempts: 3
+  retry_delay: 5  # seconds
+  fallback_on_failure: true
+  save_checkpoints: true
+  checkpoint_interval: 10  # Save every N posts
+
+  # Logging
+  logging:
+    level: 'INFO'  # Options: 'DEBUG', 'INFO', 'WARNING', 'ERROR'
+    save_to_file: true
+    log_file: 'pipeline.log'
+
+# PERFORMANCE & OPTIMIZATION
+performance:
+  parallel_processing: false
+  max_workers: 4
+  use_cache: true
+  cache_ttl: 2592000  # 30 days in seconds
+
+  # API rate limiting
+  rate_limiting:
+    enabled: true
+    openai_max_rpm: 60  # Requests per minute
+    wordpress_max_rpm: 30
+
+# OUTPUT SETTINGS
+output:
+  save_intermediate_results: true
+  output_formats:
+    - json
+    - markdown
+  generate_report: true
+  report_format: 'markdown'  # Options: 'markdown', 'html', 'pdf'
